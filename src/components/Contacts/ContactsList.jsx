@@ -12,8 +12,8 @@ class ContactList extends Component {
     const { contacts } = this.props;
     return (
       <ul className="contacts-list">
-        {contacts.map(({ id, name }) => (
-          <Contact key={id} name={name} />
+        {contacts.map(({ id, name, number }) => (
+          <Contact key={id} name={name} number={number} />
         ))}
       </ul>
     );

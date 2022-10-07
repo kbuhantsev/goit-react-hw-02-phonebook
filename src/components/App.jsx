@@ -11,7 +11,16 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
+  };
+
+  onSubmit = ({ id, name, number }) => {
+    this.setState(prevState => {
+      const { contacts } = prevState;
+      if (!contacts.find(element => element.id === id)) {
+        contacts.push({ id, name, number });
+        return { contacts: contacts };
+      }
+    });
   };
 
   render() {
@@ -19,7 +28,7 @@ export class App extends Component {
     return (
       <div style={{ marginLeft: '30px' }}>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onSubmit={this.onSubmit} />
 
         <h2>Contacts</h2>
         {/* <Filter /> */}

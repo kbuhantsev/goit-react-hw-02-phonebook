@@ -5,11 +5,16 @@ import './Contact.css';
 class Contact extends Component {
   static propTypes = {
     name: PropTypes.string,
+    number: PropTypes.string,
   };
 
   render() {
-    const { name } = this.props;
-    return <li className="contacts-item">{name}</li>;
+    const { name, number } = this.props;
+    return (
+      <li className="contacts-item">
+        {name}: {number}
+      </li>
+    );
   }
 }
 
