@@ -22,7 +22,7 @@ export class App extends Component {
       name,
       number,
     };
-    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
+    this.setState(({ contacts }) => ({ contacts: [...contacts, contact] }));
   };
 
   onFilterChange = ({ value }) => {
