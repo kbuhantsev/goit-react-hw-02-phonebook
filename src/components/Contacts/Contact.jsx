@@ -6,13 +6,19 @@ class Contact extends Component {
   static propTypes = {
     name: PropTypes.string,
     number: PropTypes.string,
+    onDelete: PropTypes.func,
   };
 
   render() {
-    const { name, number } = this.props;
+    const { id, name, number, onDelete } = this.props;
     return (
       <li className="contacts-item">
-        {name}: {number}
+        <span>
+          {id} {'-->'} {name}: {number}
+        </span>
+        <button name="delete" type="button" onClick={() => onDelete({ id })}>
+          Delete
+        </button>
       </li>
     );
   }

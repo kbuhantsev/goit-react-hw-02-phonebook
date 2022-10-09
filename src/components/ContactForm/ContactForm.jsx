@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './ContactForm.css';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 class ContactForm extends Component {
   state = {
     name: '',
@@ -15,7 +15,8 @@ class ContactForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const id = nanoid();
+    const nanoid = customAlphabet('1234567890', 10);
+    const id = 'id-' + nanoid(2);
     const { name, number } = this.state;
     const { onSubmit } = this.props;
     onSubmit({ id, name, number });

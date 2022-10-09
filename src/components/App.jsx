@@ -17,20 +17,25 @@ export class App extends Component {
   state = { ...INITIAL_STATE };
 
   onSubmit = ({ id, name, number }) => {
-    this.setState(prevState => {
-      const { contacts } = prevState;
-      if (!contacts.find(element => element.id === id)) {
-        contacts.push({ id, name, number });
-        return { contacts: contacts };
-      }
-    });
+    const contact = {
+      id,
+      name,
+      number,
+    };
+    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
 
   onFilterChange = ({ value }) => {
     this.setState({ filter: value });
   };
 
-  onChangeDebounced = debounce(this.onFilterChange, 500);
+  onFilterChangeDebounced = debounce(this.onFilterChange, 500);
+
+  onDeleteContact = ({ id }) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
 
   render() {
     const { contacts, filter } = this.state;
@@ -46,8 +51,11 @@ export class App extends Component {
         <ContactForm onSubmit={this.onSubmit} />
 
         <h2>Contacts</h2>
-        <Filter onInput={this.onChangeDebounced} />
-        <ContactList contacts={filteredContacts} />
+        <Filter onInput={this.onFilterChangeDebounced} />
+        <ContactList
+          contacts={filteredContacts}
+          onDelete={this.onDeleteContact}
+        />
       </div>
     );
   }

@@ -6,14 +6,22 @@ import './ContactList.css';
 class ContactList extends Component {
   static propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape),
+    onDelete: PropTypes.func,
   };
 
   render() {
-    const { contacts } = this.props;
+    const { contacts, onDelete } = this.props;
+
     return (
       <ul className="contacts-list">
         {contacts.map(({ id, name, number }) => (
-          <Contact key={id} name={name} number={number} />
+          <Contact
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            onDelete={onDelete}
+          />
         ))}
       </ul>
     );
