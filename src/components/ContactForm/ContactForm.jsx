@@ -38,11 +38,6 @@ class ContactForm extends Component {
     }
   };
 
-  handleInput = event => {
-    const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
-
   render() {
     return (
       <Formik
