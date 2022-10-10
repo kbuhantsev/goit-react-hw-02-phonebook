@@ -22,7 +22,12 @@ export class App extends Component {
       name,
       number,
     };
+    if (this.state.contacts.find(contact => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+      return false;
+    }
     this.setState(({ contacts }) => ({ contacts: [...contacts, contact] }));
+    return true;
   };
 
   onFilterChange = ({ value }) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Contact.css';
+import { LiStyled } from './Contact.styled';
 
 class Contact extends Component {
   static propTypes = {
@@ -12,14 +12,14 @@ class Contact extends Component {
   render() {
     const { id, name, number, onDelete } = this.props;
     return (
-      <li className="contacts-item">
+      <LiStyled>
         <span>
-          {id} {'-->'} {name}: {number}
+          {name}: {number}
         </span>
         <button name="delete" type="button" onClick={() => onDelete({ id })}>
           Delete
         </button>
-      </li>
+      </LiStyled>
     );
   }
 }

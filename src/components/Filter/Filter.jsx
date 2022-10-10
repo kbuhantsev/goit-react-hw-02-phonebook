@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { LabelStyled, InputStyled } from './Filter.styled';
 
 class Filter extends Component {
   static propTypes = {
@@ -14,14 +15,10 @@ class Filter extends Component {
 
   render() {
     return (
-      <label style={{ display: 'flex', flexDirection: 'column' }}>
+      <LabelStyled>
         Find contacts by name
-        <input
-          name="search"
-          style={{ width: '200px' }}
-          onChange={this.handleInput}
-        ></input>
-      </label>
+        <InputStyled name="search" onChange={this.handleInput}></InputStyled>
+      </LabelStyled>
     );
   }
 }

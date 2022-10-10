@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Contact from '../Contact';
-import './ContactList.css';
-
+import { UlStyled } from './ContactsList.styled';
 class ContactList extends Component {
   static propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape),
@@ -13,7 +12,7 @@ class ContactList extends Component {
     const { contacts, onDelete } = this.props;
 
     return (
-      <ul className="contacts-list">
+      <UlStyled>
         {contacts.map(({ id, name, number }) => (
           <Contact
             key={id}
@@ -23,7 +22,7 @@ class ContactList extends Component {
             onDelete={onDelete}
           />
         ))}
-      </ul>
+      </UlStyled>
     );
   }
 }
