@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Filter from './Filter/Filter';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './Contacts/ContactsList';
+import ContactForm from './ContactForm';
+import ContactList from './ContactsList';
 import debounce from 'lodash.debounce';
 
 const INITIAL_STATE = {
