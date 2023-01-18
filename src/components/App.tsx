@@ -6,10 +6,11 @@ import debounce from 'lodash.debounce';
 
 interface IProps {}
 
-interface IContact {
+export interface IContact {
   id: string;
   name: string;
   number: string;
+  [propsName: string]: any;
 }
 
 interface IState {
