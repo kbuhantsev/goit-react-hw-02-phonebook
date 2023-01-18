@@ -1,10 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Filter from './Filter/Filter';
 import ContactForm from './ContactForm';
 import ContactList from './ContactsList';
 import debounce from 'lodash.debounce';
 
-const INITIAL_STATE = {
+interface IProps {}
+
+interface IContact {
+  id: string;
+  name: string;
+  number: string;
+}
+
+interface IState {
+  contacts: Array<IContact>;
+  filter: string;
+}
+
+const INITIAL_STATE: IState = {
   contacts: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -13,10 +26,13 @@ const INITIAL_STATE = {
   ],
   filter: '',
 };
-export class App extends Component {
-  state = { ...INITIAL_STATE };
+export class App extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = { ...INITIAL_STATE };
+  }
 
-  onSubmit = ({ id, name, number }) => {
+  onSubmit = ({ id, name, number }: IContact): boolean => {
     const contact = {
       id,
       name,
@@ -30,13 +46,13 @@ export class App extends Component {
     return true;
   };
 
-  onFilterChange = ({ value }) => {
-    this.setState({ filter: value });
+  onFilterChange = ({ value: filter }: { value: string }): void => {
+    this.setState({ filter });
   };
 
   onFilterChangeDebounced = debounce(this.onFilterChange, 500);
 
-  onDeleteContact = ({ id }) => {
+  onDeleteContact = ({ id }: IContact): void => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
