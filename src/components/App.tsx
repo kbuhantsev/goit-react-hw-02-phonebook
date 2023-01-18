@@ -47,8 +47,8 @@ export class App extends React.Component<IProps, IState> {
     return true;
   };
 
-  onFilterChange = ({ value: filter }: { value: string }): void => {
-    this.setState({ filter });
+  onFilterChange = (value: string): void => {
+    this.setState(() => ({ filter: value }));
   };
 
   onFilterChangeDebounced = debounce(this.onFilterChange, 500);

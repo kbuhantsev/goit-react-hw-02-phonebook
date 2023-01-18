@@ -1,11 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { LabelStyled, InputStyled } from './Filter.styled';
 
-function Filter({ onInput }) {
-  const handleInput = event => {
+interface IProps {
+  onInput(value: string): void;
+}
+
+const Filter = ({ onInput }: IProps) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    onInput({ value });
+    onInput(value);
   };
 
   return (
@@ -14,10 +17,6 @@ function Filter({ onInput }) {
       <InputStyled name="search" onChange={handleInput}></InputStyled>
     </LabelStyled>
   );
-}
-
-Filter.propTypes = {
-  onInput: PropTypes.func,
 };
 
 export default Filter;
