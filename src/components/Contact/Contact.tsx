@@ -3,7 +3,7 @@ import { LiStyled } from './Contact.styled';
 
 interface IContactProps {
   contact: IContact;
-  onDelete({ id }: IContact): void;
+  onDelete(contact: IContact): void;
 }
 
 const Contact = ({ contact, onDelete }: IContactProps) => {

@@ -4,7 +4,7 @@ import { UlStyled } from './ContactsList.styled';
 
 interface IContactList {
   contacts: Array<IContact>;
-  onDelete({ id }: IContact): void;
+  onDelete(contact: IContact): void;
 }
 
 const ContactList = ({ contacts, onDelete }: IContactList) => {
