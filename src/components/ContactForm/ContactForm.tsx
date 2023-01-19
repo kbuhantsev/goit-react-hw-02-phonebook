@@ -33,14 +33,14 @@ interface IContactForm {
   onSubmit(contact: IContact): boolean;
 }
 
-interface OtherProps {
+interface IFormicProps {
   resetForm(): void;
 }
 
 function ContactForm({ onSubmit }: IContactForm) {
   const handleSubmit = (
     { name, number }: IFormValues,
-    { resetForm }: OtherProps
+    { resetForm }: IFormicProps
   ) => {
     const nanoid = customAlphabet('1234567890', 10);
     const id = 'id-' + nanoid(2);

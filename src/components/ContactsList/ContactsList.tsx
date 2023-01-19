@@ -3,7 +3,7 @@ import Contact from '../Contact';
 import { UlStyled } from './ContactsList.styled';
 
 interface IContactList {
-  contacts: Array<IContact>;
+  contacts: IContact[];
   onDelete(contact: IContact): void;
 }
 
