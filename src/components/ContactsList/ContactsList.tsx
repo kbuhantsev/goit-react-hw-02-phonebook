@@ -1,5 +1,5 @@
 import { IContact } from '../App';
-import Contact from '../Contact';
+import { Contact } from '../Contact/Contact';
 import { UlStyled } from './ContactsList.styled';
 
 interface IContactList {
@@ -7,7 +7,7 @@ interface IContactList {
   onDelete(contact: IContact): void;
 }
 
-const ContactList = ({ contacts, onDelete }: IContactList) => {
+export const ContactList = ({ contacts, onDelete }: IContactList) => {
   return (
     <UlStyled>
       {contacts.map(contact => (
@@ -16,5 +16,3 @@ const ContactList = ({ contacts, onDelete }: IContactList) => {
     </UlStyled>
   );
 };
-
-export default ContactList;

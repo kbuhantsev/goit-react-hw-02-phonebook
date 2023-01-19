@@ -37,7 +37,7 @@ interface IFormicProps {
   resetForm(): void;
 }
 
-function ContactForm({ onSubmit }: IContactForm) {
+export const ContactForm = ({ onSubmit }: IContactForm) => {
   const handleSubmit = (
     { name, number }: IFormValues,
     { resetForm }: IFormicProps
@@ -73,6 +73,4 @@ function ContactForm({ onSubmit }: IContactForm) {
       </FormStyled>
     </Formik>
   );
-}
-
-export default ContactForm;
+};

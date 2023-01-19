@@ -6,7 +6,7 @@ interface IContactProps {
   onDelete(contact: IContact): void;
 }
 
-const Contact = ({ contact, onDelete }: IContactProps) => {
+export const Contact = ({ contact, onDelete }: IContactProps) => {
   const { name, number } = contact;
   return (
     <LiStyled>
@@ -19,5 +19,3 @@ const Contact = ({ contact, onDelete }: IContactProps) => {
     </LiStyled>
   );
 };
-
-export default Contact;

@@ -5,7 +5,7 @@ interface IProps {
   onInput(value: string): void;
 }
 
-const Filter = ({ onInput }: IProps) => {
+export const Filter = ({ onInput }: IProps) => {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     onInput(value);
@@ -18,5 +18,3 @@ const Filter = ({ onInput }: IProps) => {
     </LabelStyled>
   );
 };
-
-export default Filter;

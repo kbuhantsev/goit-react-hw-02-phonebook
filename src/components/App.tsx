@@ -1,7 +1,7 @@
 import React from 'react';
-import Filter from './Filter/Filter';
-import ContactForm from './ContactForm';
-import ContactList from './ContactsList';
+import { Filter } from './Filter/Filter';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactsList/ContactsList';
 import debounce from 'lodash.debounce';
 
 interface IProps {}
