@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { customAlphabet } from 'nanoid';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +7,7 @@ import {
   FieldStyled,
   ButtonStyled,
 } from './ContactForm.styled';
+import { IContact } from '../App';
 
 const phoneRegExp =
   /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
@@ -25,9 +24,24 @@ const schema = Yup.object().shape({
     .required('This field is required!'),
 });
 
-function ContactForm({ onSubmit }) {
-  const handleSubmit = (values, { resetForm }) => {
-    const { name, number } = values;
+interface IFormValues {
+  name: string;
+  number: string;
+}
+
+interface IContactForm {
+  onSubmit(contact: IContact): boolean;
+}
+
+interface OtherProps {
+  resetForm(): void;
+}
+
+function ContactForm({ onSubmit }: IContactForm) {
+  const handleSubmit = (
+    { name, number }: IFormValues,
+    { resetForm }: OtherProps
+  ) => {
     const nanoid = customAlphabet('1234567890', 10);
     const id = 'id-' + nanoid(2);
 
@@ -60,7 +74,5 @@ function ContactForm({ onSubmit }) {
     </Formik>
   );
 }
-
-ContactForm.tropTypes = { onSubmit: PropTypes.func };
 
 export default ContactForm;
