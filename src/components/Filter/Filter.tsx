@@ -5,7 +5,7 @@ interface IProps {
   onInput(value: string): void;
 }
 
-export const Filter = ({ onInput }: IProps) => {
+export const Filter: React.FC<IProps> = ({ onInput }) => {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     onInput(value);

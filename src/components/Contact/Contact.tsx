@@ -6,7 +6,7 @@ interface IContactProps {
   onDelete(contact: IContact): void;
 }
 
-export const Contact = ({ contact, onDelete }: IContactProps) => {
+export const Contact: React.FC<IContactProps> = ({ contact, onDelete }) => {
   const { name, number } = contact;
   return (
     <LiStyled>

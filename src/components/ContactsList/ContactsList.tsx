@@ -7,7 +7,7 @@ interface IContactList {
   onDelete(contact: IContact): void;
 }
 
-export const ContactList = ({ contacts, onDelete }: IContactList) => {
+export const ContactList: React.FC<IContactList> = ({ contacts, onDelete }) => {
   return (
     <UlStyled>
       {contacts.map(contact => (
