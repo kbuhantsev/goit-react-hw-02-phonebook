@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactsList/ContactsList';
 import debounce from 'lodash.debounce';
-
-interface IProps {}
-
 export interface IContact {
   id: string;
   name: string;
   number: string;
 }
-
 interface IState {
   contacts: Array<IContact>;
   filter: string;
@@ -26,58 +22,60 @@ const INITIAL_STATE: IState = {
   ],
   filter: '',
 };
-export class App extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-    this.state = { ...INITIAL_STATE };
-  }
 
-  onSubmit = ({ id, name, number }: IContact): boolean => {
+export const App: React.FC = () => {
+  const [state, setState] = useState(INITIAL_STATE);
+
+  const onSubmit = ({ id, name, number }: IContact): boolean => {
     const contact = {
       id,
       name,
       number,
     };
-    if (this.state.contacts.find(contact => contact.name === name)) {
+    if (state.contacts.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
       return false;
     }
-    this.setState(({ contacts }) => ({ contacts: [...contacts, contact] }));
+
+    setState(prevState => {
+      return { ...prevState, contacts: [...prevState.contacts, contact] };
+    });
     return true;
   };
 
-  onFilterChange = (value: string): void => {
-    this.setState(() => ({ filter: value }));
+  const onFilterChange = (value: string): void => {
+    setState(prevState => {
+      return { ...prevState, filter: value };
+    });
   };
 
-  onFilterChangeDebounced = debounce(this.onFilterChange, 500);
+  const onFilterChangeDebounced = debounce(onFilterChange, 500);
 
-  onDeleteContact = ({ id }: IContact): void => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
-    }));
+  const onDeleteContact = ({ id }: IContact): void => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      };
+    });
   };
 
-  render() {
-    const { contacts, filter } = this.state;
-    let filteredContacts = contacts;
-    if (filter) {
-      filteredContacts = contacts.filter(({ name }) => {
-        return name.toLowerCase().includes(filter.toLowerCase());
-      });
-    }
-    return (
-      <div style={{ marginLeft: '30px' }}>
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.onSubmit} />
-
-        <h2>Contacts</h2>
-        <Filter onInput={this.onFilterChangeDebounced} />
-        <ContactList
-          contacts={filteredContacts}
-          onDelete={this.onDeleteContact}
-        />
-      </div>
-    );
+  const { contacts, filter } = state;
+  let filteredContacts = contacts;
+  if (filter) {
+    filteredContacts = contacts.filter(({ name }) => {
+      return name.toLowerCase().includes(filter.toLowerCase());
+    });
   }
-}
+
+  return (
+    <div style={{ marginLeft: '30px' }}>
+      <h1>Phonebook</h1>
+      <ContactForm onSubmit={onSubmit} />
+
+      <h2>Contacts</h2>
+      <Filter onInput={onFilterChangeDebounced} />
+      <ContactList contacts={filteredContacts} onDelete={onDeleteContact} />
+    </div>
+  );
+};
