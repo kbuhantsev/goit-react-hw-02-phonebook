@@ -36,7 +36,7 @@ const styles = {
     'bg-gray-100 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-0.5 px-1 ml-2',
   errorMsg: 'text-red-500 text-sm font-bold',
   button:
-    'bg-blue-500 text-white font-bold py-2 px-4 min-w-fit rounded hover:bg-blue-700 ml-auto',
+    'bg-blue-500 text-white font-bold py-1 px-4 min-w-fit rounded hover:bg-blue-700 ml-auto',
   form: 'flex flex-col gap-3 w-fit',
 };
 
@@ -45,6 +45,8 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
     { name, number }: IFormValues,
     { resetForm }: IFormicProps
   ) => {
+    console.log('handleSubmit');
+
     const nanoid = customAlphabet('1234567890', 10);
     const id = 'id-' + nanoid(2);
 
@@ -60,7 +62,7 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
       onSubmit={handleSubmit}
     >
       <form className={styles.form} name="contact-form">
-        <label htmlFor="name">
+        <label htmlFor="name" className="ml-auto dark:text-white">
           Name:
           <Field className={styles.input} type="text" name="name" />
           <ErrorMessage
@@ -70,7 +72,7 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
           />
         </label>
 
-        <label htmlFor="number">
+        <label htmlFor="number" className="ml-auto dark:text-white">
           Number:
           <Field className={styles.input} type="tel" name="number" />
           <ErrorMessage

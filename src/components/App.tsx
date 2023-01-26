@@ -27,6 +27,8 @@ export const App: React.FC = () => {
   const [state, setState] = useState(INITIAL_STATE);
 
   const onSubmit = ({ id, name, number }: IContact): boolean => {
+    console.log('submit');
+
     const contact = {
       id,
       name,
@@ -38,7 +40,12 @@ export const App: React.FC = () => {
     }
 
     setState(prevState => {
-      return { ...prevState, contacts: [...prevState.contacts, contact] };
+      console.log(prevState);
+      const newState = {
+        ...prevState,
+        contacts: [...prevState.contacts, contact],
+      };
+      return newState;
     });
     return true;
   };
@@ -92,7 +99,9 @@ export const App: React.FC = () => {
         </h1>
         <ContactForm onSubmit={onSubmit} />
 
-        <h2 className="mt-5 dark:text-white">Contacts</h2>
+        <h2 className="mt-5 dark:text-white text-xl font-medium mb-2">
+          Contacts
+        </h2>
         <Filter onInput={onFilterChangeDebounced} />
         <ContactList contacts={filteredContacts} onDelete={onDeleteContact} />
       </div>

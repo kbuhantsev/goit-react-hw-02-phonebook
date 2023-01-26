@@ -1,5 +1,4 @@
 import { IContact } from '../App';
-import { LiStyled } from './Contact.styled';
 
 interface IContactProps {
   contact: IContact;
@@ -9,13 +8,18 @@ interface IContactProps {
 export const Contact: React.FC<IContactProps> = ({ contact, onDelete }) => {
   const { name, number } = contact;
   return (
-    <LiStyled>
+    <li className="flex gap-4">
       <span>
         {name}: {number}
       </span>
-      <button name="delete" type="button" onClick={() => onDelete(contact)}>
+      <button
+        className="bg-red-500 text-white font-semibold py-0.5 px-4 rounded hover:bg-red-700 "
+        name="delete"
+        type="button"
+        onClick={() => onDelete(contact)}
+      >
         Delete
       </button>
-    </LiStyled>
+    </li>
   );
 };

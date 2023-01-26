@@ -1,9 +1,12 @@
 import React from 'react';
-import { LabelStyled, InputStyled } from './Filter.styled';
-
 interface IProps {
   onInput(value: string): void;
 }
+
+const styles = {
+  input:
+    'bg-gray-100 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-0.5 px-1 ml-2',
+};
 
 export const Filter: React.FC<IProps> = ({ onInput }) => {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,9 +15,13 @@ export const Filter: React.FC<IProps> = ({ onInput }) => {
   };
 
   return (
-    <LabelStyled>
-      Find contacts by name
-      <InputStyled name="search" onChange={handleInput}></InputStyled>
-    </LabelStyled>
+    <label className="flex dark:text-white" htmlFor="search">
+      Find contacts by name:
+      <input
+        className={styles.input}
+        name="search"
+        onChange={handleInput}
+      ></input>
+    </label>
   );
 };

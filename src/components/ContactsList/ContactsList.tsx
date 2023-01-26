@@ -1,6 +1,5 @@
 import { IContact } from '../App';
 import { Contact } from '../Contact/Contact';
-import { UlStyled } from './ContactsList.styled';
 
 interface IContactList {
   contacts: IContact[];
@@ -9,10 +8,10 @@ interface IContactList {
 
 export const ContactList: React.FC<IContactList> = ({ contacts, onDelete }) => {
   return (
-    <UlStyled>
+    <ul className="flex flex-col list-none gap-3 my-3 w-1/2">
       {contacts.map(contact => (
         <Contact key={contact.id} contact={contact} onDelete={onDelete} />
       ))}
-    </UlStyled>
+    </ul>
   );
 };
