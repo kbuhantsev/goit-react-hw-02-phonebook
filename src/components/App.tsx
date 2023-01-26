@@ -60,6 +60,15 @@ export const App: React.FC = () => {
     });
   };
 
+  const toggleDarkMode = (): void => {
+    const html = document.getElementsByTagName('html')[0] as HTMLHtmlElement;
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+    } else {
+      html.classList.add('dark');
+    }
+  };
+
   const { contacts, filter } = state;
   let filteredContacts = contacts;
   if (filter) {
@@ -69,13 +78,24 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div style={{ marginLeft: '30px' }}>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={onSubmit} />
+    <div className="dark:bg-black">
+      <button
+        className="dark:text-white"
+        type="button"
+        onClick={toggleDarkMode}
+      >
+        Toggle theme
+      </button>
+      <div className="flex flex-col container p-10 dark:bg-black">
+        <h1 className="flex justify-center text-3xl font-medium mb-3 dark:text-white">
+          Phonebook
+        </h1>
+        <ContactForm onSubmit={onSubmit} />
 
-      <h2>Contacts</h2>
-      <Filter onInput={onFilterChangeDebounced} />
-      <ContactList contacts={filteredContacts} onDelete={onDeleteContact} />
+        <h2 className="mt-5 dark:text-white">Contacts</h2>
+        <Filter onInput={onFilterChangeDebounced} />
+        <ContactList contacts={filteredContacts} onDelete={onDeleteContact} />
+      </div>
     </div>
   );
 };

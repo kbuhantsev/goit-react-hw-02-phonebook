@@ -1,12 +1,6 @@
 import { customAlphabet } from 'nanoid';
-import { Formik } from 'formik';
+import { ErrorMessage, Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import {
-  FormStyled,
-  ErrorMessageStyled,
-  FieldStyled,
-  ButtonStyled,
-} from './ContactForm.styled';
 import { IContact } from '../App';
 
 const phoneRegExp =
@@ -37,6 +31,15 @@ interface IFormicProps {
   resetForm(): void;
 }
 
+const styles = {
+  input:
+    'bg-gray-100 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-0.5 px-1 ml-2',
+  errorMsg: 'text-red-500 text-sm font-bold',
+  button:
+    'bg-blue-500 text-white font-bold py-2 px-4 min-w-fit rounded hover:bg-blue-700 ml-auto',
+  form: 'flex flex-col gap-3 w-fit',
+};
+
 export const ContactForm = ({ onSubmit }: IContactForm) => {
   const handleSubmit = (
     { name, number }: IFormValues,
@@ -56,21 +59,31 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <FormStyled name="contact-form">
+      <form className={styles.form} name="contact-form">
         <label htmlFor="name">
           Name:
-          <FieldStyled type="text" name="name" />
-          <ErrorMessageStyled name="name" component="div" />
+          <Field className={styles.input} type="text" name="name" />
+          <ErrorMessage
+            className={styles.errorMsg}
+            name="name"
+            component="div"
+          />
         </label>
 
         <label htmlFor="number">
           Number:
-          <FieldStyled type="tel" name="number" />
-          <ErrorMessageStyled name="number" component="div" />
+          <Field className={styles.input} type="tel" name="number" />
+          <ErrorMessage
+            className={styles.errorMsg}
+            name="number"
+            component="div"
+          />
         </label>
 
-        <ButtonStyled type="submit">Add contact</ButtonStyled>
-      </FormStyled>
+        <button className={styles.button} type="submit">
+          Add contact
+        </button>
+      </form>
     </Formik>
   );
 };
