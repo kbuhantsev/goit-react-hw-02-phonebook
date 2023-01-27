@@ -9,7 +9,7 @@ export const Contact: React.FC<IContactProps> = ({ contact, onDelete }) => {
   const { name, number } = contact;
   return (
     <li className="flex gap-4">
-      <span>
+      <span className="dark:text-white">
         {name}: {number}
       </span>
       <button

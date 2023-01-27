@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactsList/ContactsList';
@@ -25,10 +25,18 @@ const INITIAL_STATE: IState = {
 
 export const App: React.FC = () => {
   const [state, setState] = useState(INITIAL_STATE);
+  const [colorMode, setColorMode] = useState('light');
+
+  useEffect(() => {
+    const html = document.getElementsByTagName('html')[0] as HTMLHtmlElement;
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+    } else {
+      html.classList.add('dark');
+    }
+  }, [colorMode]);
 
   const onSubmit = ({ id, name, number }: IContact): boolean => {
-    console.log('submit');
-
     const contact = {
       id,
       name,
@@ -40,12 +48,10 @@ export const App: React.FC = () => {
     }
 
     setState(prevState => {
-      console.log(prevState);
-      const newState = {
+      return {
         ...prevState,
         contacts: [...prevState.contacts, contact],
       };
-      return newState;
     });
     return true;
   };
@@ -68,11 +74,10 @@ export const App: React.FC = () => {
   };
 
   const toggleDarkMode = (): void => {
-    const html = document.getElementsByTagName('html')[0] as HTMLHtmlElement;
-    if (html.classList.contains('dark')) {
-      html.classList.remove('dark');
+    if (colorMode === 'dark') {
+      setColorMode('light');
     } else {
-      html.classList.add('dark');
+      setColorMode('dark');
     }
   };
 
@@ -91,7 +96,7 @@ export const App: React.FC = () => {
         type="button"
         onClick={toggleDarkMode}
       >
-        Toggle theme
+        {colorMode === 'dark' ? 'Dark theme' : 'Light theme'}
       </button>
       <div className="flex flex-col container p-10 dark:bg-black">
         <h1 className="flex justify-center text-3xl font-medium mb-3 dark:text-white">

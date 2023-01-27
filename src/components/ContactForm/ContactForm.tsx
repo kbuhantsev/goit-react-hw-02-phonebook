@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import { ErrorMessage, Formik, Field } from 'formik';
+import { ErrorMessage, Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { IContact } from '../App';
 
@@ -45,8 +45,6 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
     { name, number }: IFormValues,
     { resetForm }: IFormicProps
   ) => {
-    console.log('handleSubmit');
-
     const nanoid = customAlphabet('1234567890', 10);
     const id = 'id-' + nanoid(2);
 
@@ -61,7 +59,7 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <form className={styles.form} name="contact-form">
+      <Form className={styles.form} name="contact-form">
         <label htmlFor="name" className="ml-auto dark:text-white">
           Name:
           <Field className={styles.input} type="text" name="name" />
@@ -85,7 +83,7 @@ export const ContactForm = ({ onSubmit }: IContactForm) => {
         <button className={styles.button} type="submit">
           Add contact
         </button>
-      </form>
+      </Form>
     </Formik>
   );
 };
