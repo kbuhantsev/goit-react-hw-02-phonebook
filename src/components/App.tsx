@@ -98,7 +98,7 @@ export const App: React.FC = () => {
       >
         {colorMode === 'dark' ? 'Dark theme' : 'Light theme'}
       </button>
-      <div className="flex flex-col container p-10 dark:bg-black">
+      <div className="flex flex-col container h-screen p-10 dark:bg-black">
         <h1 className="flex justify-center text-3xl font-medium mb-3 dark:text-white">
           Phonebook
         </h1>
